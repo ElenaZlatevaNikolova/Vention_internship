@@ -1,20 +1,18 @@
+const Person = require('./Person');
+
 class User extends Person {
-    constructor(firstName, lastName, age, homeCity, username, password ) {
-        super(firstName, lastName, age, homeCity);
+  constructor(firstName, lastName, age, homeCity, username, password) {
+    // Initialize the properties specific to the User class
+    super(firstName, lastName, age, homeCity);
 
-        this.username = username;
-        this.password = password;
-    }
+    // Add additional properties specific to the User class
+    this.username = username;
+    this.password = password;
+  }
 
-    getUsername(){
-        return(username);
-    }
-    getPassword(){
-        return(password);
-    }
-    displayLoginInfo(){
-        console.log(`User's credentials are: ${this.username}, ${this.password}`)
-    }
+  // Additional methods specific to the User class can be added here
 }
 
-const personOne = new User("Jane", "Davis", 45, "NYC", "jane_davis", "Jane123")
+// Export the User class for use in other files
+module.exports = User;
+
