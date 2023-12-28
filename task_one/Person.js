@@ -7,7 +7,7 @@ class Person {
     }
   
     getFullName() {
-      return `${this.firstName} ${this.lastName}`;
+      console.log(`${this.firstName} ${this.lastName}`);
     }
   
     displayInfo() {

@@ -1,0 +1,51 @@
+// Async/await and promises
+
+// Prepare ice cream 
+// 1. Place order and choose fruit - 2 sec.
+// 2. Cut the fruits - 2 sec.
+// 3. Add liquids - 1 sec.
+// 4. Start the machine - 1 sec.
+// 5. Choose container - 2 sec.
+// 6. Choose topping - 3 sec.
+// 7. Serve ice aream - 4 sec.
+
+
+let stocks = {
+  Fruits: ['banana', 'strawberry', 'blueberry', 'cherry'],
+  Liquids: ['milk', 'cream', 'water'],
+  Containers: ['cup', 'cone', 'stick'],
+  Topping: ['chocolate', 'syrup'],
+};
+
+let is_shop_open = false;
+
+async function kitchen() {
+  try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log(`${stocks.Fruits[0]} has been chosen. Production has started`);
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log(`The ${stocks.Fruits[0]} has been cut.`);
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log(`${stocks.Liquids[1]} has been added`);
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('The machine has been started.');
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log(`The ${stocks.Containers[0]} has been chosen for a container`);
+
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      console.log(`${stocks.Topping[1]} has been chosen for topping.`);
+
+      await new Promise(resolve => setTimeout(resolve, 4000));
+      console.log('The ice cream has been served!');
+  } catch (error) {
+      console.log('Customer left.', error.message);
+  } finally {
+      console.log('Day ended. The shop is closed.');
+  }
+}
+
+kitchen();
