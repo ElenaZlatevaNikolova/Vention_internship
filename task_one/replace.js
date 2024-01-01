@@ -1,11 +1,10 @@
-function replaceSpacesWithUnderscores(inputString) {
-    const resultString = inputString.replace(' ', '_');
-    return resultString;
-  }
+function replace(input) {
   
+  return input.replace(/ /g, '_');
+}
 
-  const originalString = "I love Javascript";
-  const result = replaceSpacesWithUnderscores(originalString);
-  
-  console.log(result);
-  
+
+const original = "I love Javascript";
+
+
+console.log(replace(original));

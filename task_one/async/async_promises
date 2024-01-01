@@ -20,31 +20,32 @@ let stocks = {
 let is_shop_open = false;
 
 async function kitchen() {
+  
   try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log(`${stocks.Fruits[0]} has been chosen. Production has started`);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log(`${stocks.Fruits[0]} has been chosen. Production has started`);
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log(`The ${stocks.Fruits[0]} has been cut.`);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log(`The ${stocks.Fruits[0]} has been cut.`);
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log(`${stocks.Liquids[1]} has been added`);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log(`${stocks.Liquids[1]} has been added`);
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('The machine has been started.');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log('The machine has been started.');
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log(`The ${stocks.Containers[0]} has been chosen for a container`);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log(`The ${stocks.Containers[0]} has been chosen for a container`);
 
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      console.log(`${stocks.Topping[1]} has been chosen for topping.`);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    console.log(`${stocks.Topping[1]} has been chosen for topping.`);
 
-      await new Promise(resolve => setTimeout(resolve, 4000));
-      console.log('The ice cream has been served!');
+    await new Promise(resolve => setTimeout(resolve, 4000));
+    console.log('The ice cream has been served!');
   } catch (error) {
-      console.log('Customer left.', error.message);
+    console.log('Customer left.', error.message);
   } finally {
-      console.log('Day ended. The shop is closed.');
+    console.log('Day ended. The shop is closed.');
   }
 }
 
