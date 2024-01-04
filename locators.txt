@@ -1,4 +1,4 @@
-			        Selenium			                        WebdriverIO
+			        xPath			                            WebdriverIO
 
 ID			        //*[@id="logo"]			                    $('#logo');  
 
@@ -12,8 +12,9 @@ Partial Link Text	//*[contains(text(),'Послед')]	            $('*= Пос�
 
 CSS			        #logo				                        $('#logo');  
 
-xPath			//a[@title="Бизнес"]			                        $(‘//a[@title="Бизнес"]’)
+xPath			    //a[@title="Бизнес"]			            $(‘//a[@title="Бизнес"]’)
 
-Table			//table[@id="table1"]/tbody/tr[td[text()="jdoe@hotmail.com"]]/td[count(//table[@id="table1"]/thead/tr/th/span[text()="Due"]/ancestor::th/preceding-sibling::th)+1]	
 
-$(‘//table[@id="table1"]/tbody/tr[td[text()="jdoe@hotmail.com"]]/td[count(//table[@id="table1"]/thead/tr/th/span[text()="Due"]/ancestor::th/preceding-sibling::th)+1]’)
+Table xPath 	    //table[@id="table1"]/tbody/tr[td[text()="jdoe@hotmail.com"]]/td[count(//table[@id="table1"]/thead/tr/th/span[text()="Due"]/ancestor::th/preceding-sibling::th)+1]	
+
+Table WebdriverIO   $(‘//table[@id="table1"]/tbody/tr[td[text()="jdoe@hotmail.com"]]/td[count(//table[@id="table1"]/thead/tr/th/span[text()="Due"]/ancestor::th/preceding-sibling::th)+1]’)
