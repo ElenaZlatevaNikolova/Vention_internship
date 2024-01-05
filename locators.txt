@@ -1,0 +1,20 @@
+			        xPath			                            WebdriverIO
+
+ID			        //*[@id="logo"]			                    $('#logo');  
+
+Name			    [name="month"]			                    $(‘[name='month']’)
+
+Tag			        //header	 		                        $('<header ')
+
+Link Text		    //*[text()="DoctorOnline"]	                $('= DoctorOnline)
+
+Partial Link Text	//*[contains(text(),'Послед')]	            $('*= Послед‘)
+
+CSS			        #logo				                        $('#logo');  
+
+xPath			    //a[@title="Бизнес"]			            $(‘//a[@title="Бизнес"]’)
+
+
+Table xPath 	    //table[@id="table1"]/tbody/tr[td[text()="jdoe@hotmail.com"]]/td[count(//table[@id="table1"]/thead/tr/th/span[text()="Due"]/ancestor::th/preceding-sibling::th)+1]	
+
+Table WebdriverIO   $(‘//table[@id="table1"]/tbody/tr[td[text()="jdoe@hotmail.com"]]/td[count(//table[@id="table1"]/thead/tr/th/span[text()="Due"]/ancestor::th/preceding-sibling::th)+1]’)
