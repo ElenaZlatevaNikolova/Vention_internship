@@ -1,0 +1,22 @@
+{
+  "name": "element_interactions",
+  "version": "1.0.0",
+  "description": "Tests for interactions with different web elements",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "author": "Elena Nikolova",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/cli": "^8.27.1",
+    "@wdio/local-runner": "^8.27.0",
+    "@wdio/mocha-framework": "^8.27.0",
+    "@wdio/spec-reporter": "^8.27.0",
+    "wdio-wait-for": "^3.0.10"
+  },
+  "dependencies": {
+    "chai": "^5.0.0"
+  }
+}
