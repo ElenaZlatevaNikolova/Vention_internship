@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Tests for interactions with different web elements",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "test",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.cjs"
   },
   "author": "Elena Nikolova",
   "license": "ISC",
