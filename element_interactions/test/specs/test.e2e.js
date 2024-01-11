@@ -1,6 +1,7 @@
 // import { browser, $ } from '@wdio/globals';
 import { assert } from 'chai';
-// const assert = require('assert');
+import * as path from 'path'
+import * as fs from 'fs'
 
 
 describe('Interaction with various web elements', () => {
@@ -72,30 +73,94 @@ describe('Interaction with various web elements', () => {
 
     });
 
-    
-    it('should verify iFrame content', async () => {
-        await browser.url('http://the-internet.herokuapp.com/iframe');
-    
-        const getDocumentText = () => browser.executeScript(
-            'return document.documentElement.outerText',
-            []
-        );
-    
-      expect(await getDocumentText()).toContain('An iFrame containing the TinyMCE WYSIWYG Editor');
-    
-        // Switch to the iframe
-        const iframe = await browser.$('iframe');
-        await browser.switchToFrame(iframe);
-    
-       await browser.pause(1000);
-    
-        // Assert that the content inside the iframe contains "Your content goes here."
-        const iframeText = await getDocumentText();
-        const expectedText = 'Your content goes here.';
-        assert.equal(iframeText, expectedText, `Actual text inside the iframe: ${iframeText}`);
+    it('should upload a file', async () => {
+
+        await browser.url('http://the-internet.herokuapp.com/upload');
+
+
+        const chooseFileButton = $('#file-upload');
+        const submitFileButton = $('#file-submit');
+
+        // Upload file  
+
+        const filePath = 'C:\\Vention\\Vention_internship\\element_interactions\\test\\specs\\testFile.txt'
+        const remoteFilePath = await browser.uploadFile(filePath)
+
+        await chooseFileButton.setValue(remoteFilePath)
+        await submitFileButton.click()
+
+
+        // Verify that the file has been uploaded
+        const successMessage = $('//h3[text()="File Uploaded!"]');
+        await successMessage.waitForDisplayed();
+
+        // Verify that the uploaded file name matches the expected file name
+        const uploadedFileName = await $('//div[@id="uploaded-files"]').getText();
+        assert.equal(uploadedFileName, "testFile.txt", 'Uploaded file name does not match');
     });
 
-   
+    it('should verify iFrame content', async () => {
+        await browser.url('http://the-internet.herokuapp.com/frames');
+
+        // Switch to the iframe
+        const iframeLink = $("//a[text()='iFrame']");
+        await iframeLink.click();
+        const iframe = await $('iframe')
+        await browser.switchToFrame(iframe);
+
+        // Assert the text of element
+        const iframeTextLocator = $("//p");
+        const iframeText = await iframeTextLocator.getText();
+        const expectedText = 'Your content goes here.';
+        assert.equal(iframeText, expectedText, "Text doesn't match");
+    });
+
+
+    it.only('should download and verify file', async () => {
+
+        await browser.url(`https://the-internet.herokuapp.com/download`);
+        const links = await $$('//a');
+        const extensions = ['.jpg', '.txt', '.png', '.json'];
+        const allowedLinks = [];
+
+        for (const link of links) {
+            const name = await link.getText();
+            allowedLinks.push(name);
+        }
+
+
+        const filteredLinks = allowedLinks.filter(linkName => {
+            for (const extension of extensions) {
+                if (linkName.endsWith(extension)) {
+                    return true;
+                }
+                else { return false; }
+            }
+
+        });
+
+        assert.isTrue(filteredLinks.length > 0)
+
+        const randomIndex = Math.floor(Math.random() * filteredLinks.length);
+        const pickedLink = filteredLinks[randomIndex];
+
+        const randomFile = await $(`//a[contains(text(),'${pickedLink}')]`)
+        const pathToRandomFile = await $(`C:\\Vention\\Vention_internship\\element_interactions\\${pickedLink}`)
+        await randomFile.click();
+
+
+        await browser.waitUntil(async () => {
+            const confirmDownload = fs.existsSync(pathToRandomFile);
+            return confirmDownload
+
+        })
+
+
+    
+    })
+
+    assert.equal(confirmDownload, tru, "File not found");
+
 
 
 })
