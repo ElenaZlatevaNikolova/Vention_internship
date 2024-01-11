@@ -1,7 +1,7 @@
 // import { browser, $ } from '@wdio/globals';
 import { assert } from 'chai';
 import * as path from 'path'
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 
 
 describe('Interaction with various web elements', () => {
@@ -29,7 +29,6 @@ describe('Interaction with various web elements', () => {
     });
 
     it('should remove element and enable text field', async () => {
-        // Open the URL in Chrome
         await browser.url('http://the-internet.herokuapp.com/dynamic_controls');
 
         // Locate the "Remove" button and click it
@@ -139,13 +138,15 @@ describe('Interaction with various web elements', () => {
 
         });
 
+
         assert.isTrue(filteredLinks.length > 0)
 
         const randomIndex = Math.floor(Math.random() * filteredLinks.length);
         const pickedLink = filteredLinks[randomIndex];
+        const currentDirectory = process.cwd()
 
         const randomFile = await $(`//a[contains(text(),'${pickedLink}')]`)
-        const pathToRandomFile = await $(`C:\\Vention\\Vention_internship\\element_interactions\\${pickedLink}`)
+        const pathToRandomFile = path.join(currentDirectory, `${pickedLink}`);
         await randomFile.click();
 
 
@@ -154,12 +155,13 @@ describe('Interaction with various web elements', () => {
             return confirmDownload
 
         })
+        const confirmDownload = fs.existsSync(pathToRandomFile)
+
+        assert.isTrue(confirmDownload, "File not found");
 
 
-    
     })
 
-    assert.equal(confirmDownload, tru, "File not found");
 
 
 
