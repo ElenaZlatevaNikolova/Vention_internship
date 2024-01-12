@@ -1,4 +1,3 @@
-// import { browser, $ } from '@wdio/globals';
 import { assert } from 'chai';
 import * as path from 'path'
 import * as fs from 'node:fs'
@@ -16,7 +15,9 @@ describe('Interaction with various web elements', () => {
         await contextMenu.click({ button: 2, skipRelease: true })
 
         // Wait for the alert to appear
-        await browser.waitUntil(() => browser.isAlertOpen());
+        await browser.waitUntil(async () => {
+            return await browser.isAlertOpen();
+        });
 
         // Validate the alert text 
         const alertText = await browser.getAlertText();
@@ -24,73 +25,64 @@ describe('Interaction with various web elements', () => {
 
         // Accept the alert
         await browser.acceptAlert();
-
-
     });
 
     it('should remove element and enable text field', async () => {
         await browser.url('http://the-internet.herokuapp.com/dynamic_controls');
 
         // Locate the "Remove" button and click it
-        const removeButton = $('//button[text()="Remove"]');
+        const removeButton = await $('//button[text()="Remove"]');
         await removeButton.click();
 
         // Wait for the "It's gone!" text to appear
-        const goneText = $('//p[text()="It\'s gone!"]');
+        const goneText = await $('//p[text()="It\'s gone!"]');
         await goneText.waitForDisplayed();
 
         // Validate that the text of the element is "It's gone!"
         assert.equal(await goneText.getText(), "It's gone!", "Text doesn't match");
 
         // Verify that the element with locator //div[@id="checkbox"] is no longer present
-        const checkboxElement = $('//div[@id="checkbox"]');
-        assert.isFalse(await checkboxElement.isExisting(), "The element is still present");
+        const checkboxElement = await $('//div[@id="checkbox"]');
+        const isCheckboxVisible = await checkboxElement.isExisting();
+
+        assert.isFalse(isCheckboxVisible, "The element is still present");
 
         // Locate the input field
-        const inputField = $('//input[@type="text"]');
+        const inputField = await $('//input[@type="text"]');
 
         // Verify it's disabled
-        let isEnabled = inputField.isEnabled();
-        // assert.equal(isEnabled, false, "Element not disabled")
-        assert.isFalse(await isEnabled, "Element is not disabled");
+        let isEnabled = await inputField.isEnabled();
+        assert.isFalse(isEnabled, "Element is not disabled");
 
         // Enable it
-        let enableDisableButton = $('//form[@id="input-example"]/button[@type="button"]')
+        let enableDisableButton = await $('//form[@id="input-example"]/button[@type="button"]')
         await enableDisableButton.click();
 
         // Verify the enable text
-        const enabledText = $('//p[text()="It\'s enabled!"]');
+        const enabledText = await $('//p[text()="It\'s enabled!"]');
         assert.equal(await enabledText.getText(), "It's enabled!", "Text doesn't match");
 
-        // Assert the input field is enabled
-        // assert.equal(isEnabled, true, "Input field not enabled")
-        isEnabled = inputField.isEnabled();
-        assert.isTrue(await isEnabled, "The field is still disabled!");
-
-        // assert.equal(enableDisableButton.getText(), 'Disable', "Input field not enabled" );
-
-
+        // Verify the input field is enabled
+        isEnabled = await inputField.isEnabled();
+        assert.isTrue(isEnabled, "The field is still disabled!");
     });
 
     it('should upload a file', async () => {
-
         await browser.url('http://the-internet.herokuapp.com/upload');
 
+        const chooseFileButton = await $('#file-upload');
+        const submitFileButton = await $('#file-submit');
 
-        const chooseFileButton = $('#file-upload');
-        const submitFileButton = $('#file-submit');
-
-        // Upload file  
-
-        const filePath = 'C:\\Vention\\Vention_internship\\element_interactions\\test\\specs\\testFile.txt'
-        const remoteFilePath = await browser.uploadFile(filePath)
+        // Upload file
+        const currentDirectory = process.cwd();
+        const filePath = path.join(currentDirectory, "\\test\\specs\\testFile.txt");
+        const remoteFilePath = await browser.uploadFile(filePath);
 
         await chooseFileButton.setValue(remoteFilePath)
         await submitFileButton.click()
 
-
         // Verify that the file has been uploaded
-        const successMessage = $('//h3[text()="File Uploaded!"]');
+        const successMessage = await $('//h3[text()="File Uploaded!"]');
         await successMessage.waitForDisplayed();
 
         // Verify that the uploaded file name matches the expected file name
@@ -115,31 +107,23 @@ describe('Interaction with various web elements', () => {
     });
 
 
-    it.only('should download and verify file', async () => {
-
+    it('should download and verify file', async () => {
         await browser.url(`https://the-internet.herokuapp.com/download`);
+
         const links = await $$('//a');
-        const extensions = ['.jpg', '.txt', '.png', '.json'];
-        const allowedLinks = [];
+        // const extensions = ['.jpg', '.txt', '.png', '.json'];
+        const linksNames = [];
 
         for (const link of links) {
             const name = await link.getText();
-            allowedLinks.push(name);
+            linksNames.push(name);
         }
 
-
-        const filteredLinks = allowedLinks.filter(linkName => {
-            for (const extension of extensions) {
-                if (linkName.endsWith(extension)) {
-                    return true;
-                }
-                else { return false; }
-            }
-
+        const filteredLinks = linksNames.filter(linkName => {
+            return linkName.endsWith('.jpg') || linkName.endsWith('.txt') || linkName.endsWith('.png') || linkName.endsWith('.json');
         });
 
-
-        assert.isTrue(filteredLinks.length > 0)
+        assert.isTrue(filteredLinks.length > 0, "No files with allowed extensions found")
 
         const randomIndex = Math.floor(Math.random() * filteredLinks.length);
         const pickedLink = filteredLinks[randomIndex];
@@ -149,21 +133,11 @@ describe('Interaction with various web elements', () => {
         const pathToRandomFile = path.join(currentDirectory, `${pickedLink}`);
         await randomFile.click();
 
+        await browser.waitUntil(async () => fs.existsSync(pathToRandomFile))
 
-        await browser.waitUntil(async () => {
-            const confirmDownload = fs.existsSync(pathToRandomFile);
-            return confirmDownload
-
-        })
-        const confirmDownload = fs.existsSync(pathToRandomFile)
-
-        assert.isTrue(confirmDownload, "File not found");
-
-
+        const isFileExist = fs.existsSync(pathToRandomFile)
+        assert.isTrue(isFileExist, "File not found");
     })
-
-
-
 
 })
 
