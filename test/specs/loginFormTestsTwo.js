@@ -27,7 +27,7 @@ describe('Validation of elements in the login form on https://www.saucedemo.com/
         assert.equal(loginButtonText, "Login", errorMessage)
         assert.equal(expectedColor, '#3ddc91', "Color doesn't match");
 
-        // Check the list of usernames/ The list of usernames should contain all these usernames:standard_user, locked_out_user,
+        // Check the list of usernames/ The list of usernames should contain all these usernames: standard_user, locked_out_user,
         // problem_user, performance_glitch_user, error_user, visual_user
 
         const allowedUsernames = ['standard_user', 'locked_out_user', 'problem_user',
@@ -52,6 +52,5 @@ describe('Validation of elements in the login form on https://www.saucedemo.com/
         const expectedText = "secret_sauce";
 
         assert.equal(password, expectedText, errorMessage);
-
     });
 })
