@@ -11,8 +11,8 @@ describe('Validation of elements on the landing page of https://www.saucedemo.co
         // Check that after pressing login button with empty credential fields, error message is displayed
         const loginButton = await $('//input[@data-test="login-button"]');
         loginButton.click();
-        const errorMessage = await $("//div[@class='error-message-container error']");
-        const isDisplayed = await errorMessage.isDisplayed();
+        let errorMessage = await $('//h3[@data-test="error"]');
+        let isDisplayed = await errorMessage.isDisplayed();
         assert.isTrue(isDisplayed, textErrorMessage)
 
         // Check that username field contains error icon
@@ -23,11 +23,13 @@ describe('Validation of elements on the landing page of https://www.saucedemo.co
         // Check that password field contains error icon
         const passwordErrorIcon = await $('//div[@class="login-box"]//div[2]//*[name()="svg"]')
         let isPasswordErrorIconDisplayed = await passwordErrorIcon.isDisplayed();
-        assert.isTrue(isPasswordErrorIconDisplayed, elementErrorMessage)
+        assert.isTrue(isPasswordErrorIconDisplayed, elementErrorMessage);
 
         // Close error message/Error message is no longer displayed
-        const closeErrorMessage = await $('//div[@class="login-box"]//div[3]//*[name()="svg"]')
+        const closeErrorMessage = await $("//button[@class='error-button']")
         closeErrorMessage.click();
+        isDisplayed = await errorMessage.isDisplayed();
+        assert.isFalse(isDisplayed, "The error message is still displayed!");
 
         // Check that username field doesn’t contain error icon any more
         isUsernameErrorDisplayed = await usernameErrorIcon.isDisplayed();
