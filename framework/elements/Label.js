@@ -1,4 +1,4 @@
-const BaseElement = require('./BaseElement');
+import BaseElement from "./BaseElement";
 
 class Label extends BaseElement {
     constructor(name, selector) {
@@ -6,4 +6,4 @@ class Label extends BaseElement {
     }
 }
 
-module.exports = Label;
+export default Label;

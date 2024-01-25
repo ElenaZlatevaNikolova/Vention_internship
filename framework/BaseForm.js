@@ -1,4 +1,4 @@
-const Label = require ("./elements/Label");
+import Label from "./elements/Label";
 
 class BaseForm {
     constructor(name, selector) {
@@ -6,7 +6,7 @@ class BaseForm {
         this.selector = selector;
     }
 
-    async isFormDisplayed () {
+    async isFormDisplayed() {
         let pageLabel = new Label(this.name, this.selector)
         let isFormDisplayed;
         try {
@@ -18,4 +18,4 @@ class BaseForm {
     }
 }
 
-module.exports = BaseForm;
+export default BaseForm;

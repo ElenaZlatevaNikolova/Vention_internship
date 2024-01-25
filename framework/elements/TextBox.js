@@ -1,29 +1,29 @@
-const BaseElement = require('./BaseElement');
+import BaseElement from "./BaseElement";
 
 class TextBox extends BaseElement {
   constructor(name, selector) {
     super(name, selector);
   }
 
-  clear() {
-    const element = super.findElement();
-    element.clearValue();
+  async clear() {
+    const element = await super.findElement();
+    await element.clearValue();
   }
 
-  typeText(text) {
-    const element = super.findElement();
-    element.setValue(text);
+  async typeText(text) {
+    const element = await browser.findElement();
+    await element.setValue(text);
   }
 
-  getPlaceholder() {
-    const element = super.findElement();
-    return element.getAttribute('placeholder');
+  async addText(text) {
+    const element = await browser.findElement();
+    await element.addValue(text);
   }
 
-  isEmpty() {
-    const element = super.findElement();
-    return element.getValue() === '';
+  async getPlaceholder() {
+    const element = await super.findElement();
+    return await element.getAttribute('placeholder');
   }
 }
 
-module.exports = TextBox;
+export default TextBox;

@@ -1,58 +1,52 @@
 class Browser {
 
-
-  constructor() {
-    this.browser = browser;
+  async navigateTo(url) {
+    await this.browser.url(url);
   }
 
-  navigateTo(url) {
-    this.browser.url(url);
+  async getCurrentUrl() {
+    return browser.getUrl();
   }
 
-  getCurrentUrl() {
-    return this.browser.getUrl();
+  async getPageTitle() {
+    return browser.getTitle();
   }
 
-  getPageTitle() {
-    return this.browser.getTitle();
+  async getElement(selector) {
+    return browser.$(selector);
   }
 
-  findElement(selector) {
-    return this.browser.$(selector);
+  async getElements(selector) {
+    return browser.$$(selector);
   }
 
-  waitForElement(selector, timeout = 5000) {
-    const element = this.findElement(selector);
-    element.waitForExist({ timeout });
+  async refreshPage() {
+    await browser.refresh();
   }
 
-  refreshPage() {
-    browser.refresh();
+  async switchToFrame(frame) {
+    await browser.switchToFrame(frame);
   }
 
-   switchToFrame(frame) {
-    browser.switchToFrame(frame);
+  async switchToDefaultContent() {
+    await browser.switchToFrame(null);
   }
 
-  switchToDefaultContent() {
-    browser.switchToFrame(null); 
+  async acceptAlert() {
+    await browser.acceptAlert();
   }
 
-   acceptAlert() {
-    browser.acceptAlert();
+  async dismissAlert() {
+    await browser.dismissAlert();
   }
 
-    dismissAlert() {
-    browser.dismissAlert();
-  }
-
-   getAlertText() {
+  async getAlertText() {
     return browser.getAlertText();
   }
 
-  close() {
-    this.browser.closeWindow();
+  async close() {
+    await this.browser.closeWindow();
   }
 }
 
-module.exports = Browser;
+export default Browser;

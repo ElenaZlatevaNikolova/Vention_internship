@@ -1,10 +1,10 @@
 import BaseElement from "./BaseElement";
 
-class Button extends BaseElement {
+class Dropdown extends BaseElement {
     constructor(name, selector) {
         super(name, selector);
     }
 
 }
 
-export default Button;
+export default Dropdown;

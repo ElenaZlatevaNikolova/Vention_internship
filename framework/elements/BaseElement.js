@@ -4,72 +4,108 @@ class BaseElement {
         this.selector = selector;
     }
 
-    findElement() {
-        return browser.$(this.selector);
+    async moveTo() {
+        const element = await browser.findElement(this.selector);
+        await element.moveTo();
     }
 
-    findElements() {
-        return browser.$$(this.selector);
+    async isDisplayed() {
+        const element = await browser.findElement(this.selector);
+        let isDisplayed;
+        try {
+            isDisplayed = await element.isDisplayed();
+        } catch (error) {
+            return false;
+        }
+        return isDisplayed;
     }
 
-    moveTo() {
-        const element = this.findElement();
-        element.moveTo();
+    async isExisting() {
+        const element = await browser.findElement(this.selector);
+        let isExisting;
+        try {
+            isExisting = await element.isDisplayed();
+        } catch (error) {
+            return false;
+        }
+        return isExisting;
     }
 
-    isDisplayed() {
-        const element = this.findElement();
-        return element.isDisplayed();
+    async isEnabled() {
+        const element = await browser.findElement(this.selector);
+        let isEnabled;
+        try {
+            isEnabled = await element.isEnabled();
+        } catch (error) {
+            return false;
+        }
+        return isEnabled;
     }
 
-    isExisting() {
-        const element = this.findElement();
-        return element.isExisting();
+    async isSelected() {
+        const element = await browser.findElement(this.selector);
+        let isSelected;
+        try {
+            isSelected = await element.isSelected();
+        } catch (error) {
+            return false;
+        }
+        return isSelected;
     }
 
-    isEnabled() {
-        const element = this.findElement();
-        return element.isEnabled();
+    async getCssProperty(propertyName) {
+        const element = await browser.findElement(this.selector);
+        return await element.getCSSProperty(propertyName).value;
     }
 
-    isSelected() {
-        const element = this.findElement();
-        return element.isSelected();
+    async scrollIntoView() {
+        const element = await browser.findElement(this.selector);
+        await element.scrollIntoView();
     }
 
-    getCssProperty(propertyName) {
-        const element = this.findElement();
-        return element.getCSSProperty(propertyName).value;
+    async getText() {
+        const element = await browser.findElement(this.selector);
+        return await element.getText();
     }
 
-    scrollIntoView() {
-        const element = this.findElement();
-        element.scrollIntoView();
+    async getValue() {
+        const element = await browser.findElement(this.selector);
+        return await element.getValue();
     }
 
-    getText() {
-        const element = this.findElement();
-        return element.getText();
+    async getAttribute(attributeName) {
+        const element = await browser.findElement(this.selector);
+        return await element.getAttribute(attributeName);
     }
 
-    getValue() {
-        const element = this.findElement();
-        return element.getValue();
+    async dragAndDrop(targetSelector) {
+        const sourceElement = await browser.findElement(this.selector);
+        const targetElement = await browser.$(targetSelector);
+        await sourceElement.dragAndDrop(targetElement);
     }
 
-    getAttribute(attributeName) {
-        const element = this.findElement();
-        return element.getAttribute(attributeName);
+    async click() {
+        const element = await browser.findElement(this.selector);
+        await element.click();
     }
 
-    dragAndDrop(targetSelector) {
-        const sourceElement = this.findElement();
-        const targetElement = browser.$(targetSelector);
-        sourceElement.dragAndDrop(targetElement);
+    async doubleClick() {
+        const element = await browser.findElement(this.selector);
+        await element.doubleClick();
+    }
+
+    async rightClick() {
+        const element = await browser.findElement(this.selector);
+        await element.click({ button: 'right' });
+    }
+
+    async waitForExist(selector, timeout = 5000) {
+        const element = await browser.findElement(selector);
+        await element.waitForExist({ timeout });
     }
 }
 
-module.exports = BaseElement;
+export default BaseElement;
 
 
 
