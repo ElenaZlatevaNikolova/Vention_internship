@@ -1,7 +1,9 @@
 class Browser {
 
+
+
   async navigateTo(url) {
-    await this.browser.url(url);
+    return browser.url(url);
   }
 
   async getCurrentUrl() {
@@ -10,14 +12,6 @@ class Browser {
 
   async getPageTitle() {
     return browser.getTitle();
-  }
-
-  async getElement(selector) {
-    return browser.$(selector);
-  }
-
-  async getElements(selector) {
-    return browser.$$(selector);
   }
 
   async refreshPage() {
@@ -45,8 +39,8 @@ class Browser {
   }
 
   async close() {
-    await this.browser.closeWindow();
+    await browser.closeWindow();
   }
 }
 
-export default Browser;
+export default new Browser;

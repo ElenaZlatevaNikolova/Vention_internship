@@ -1,4 +1,4 @@
-import BaseElement from "./BaseElement";
+import BaseElement from "./BaseElement.j";
 
 class Button extends BaseElement {
     constructor(name, selector) {

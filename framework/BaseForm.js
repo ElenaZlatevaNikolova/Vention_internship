@@ -1,4 +1,4 @@
-import Label from "./elements/Label";
+import Label from "./elements/Label.js";
 
 class BaseForm {
     constructor(name, selector) {
