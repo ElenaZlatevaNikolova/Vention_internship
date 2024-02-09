@@ -1,6 +1,8 @@
 import BaseForm from "../framework/BaseForm.js";
 import Label from "../framework/elements/Label.js";
 import Browser from "../framework/Browser.js";
+import Logger from "../framework/logConfiguration/Logger.js";
+
 
 class ProductPage extends BaseForm {
     constructor() {
@@ -10,11 +12,13 @@ class ProductPage extends BaseForm {
     }
 
     async openProductPage() {
+       Logger.debug('Open product page https://www.saucedemo.com/ ')
         await Browser.navigateTo("https://www.saucedemo.com/inventory.html")
 
     }
 
     async isProductPageElementDisplayed() {
+       Logger.debug("Checking if product page is displayed")
         const timeout = 6000;
 
         try {

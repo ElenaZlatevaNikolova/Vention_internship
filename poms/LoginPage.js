@@ -1,9 +1,9 @@
 import BaseForm from "../framework/BaseForm.js";
-import BaseElement from "../framework/elements/BaseElement.js";
 import Label from "../framework/elements/Label.js";
 import TextBox from "../framework/elements/TextBox.js";
 import Browser from "../framework/Browser.js";
 import Button from "../framework/elements/Button.js";
+
 
 class LoginPage extends BaseForm {
     constructor() {
@@ -22,101 +22,91 @@ class LoginPage extends BaseForm {
     }
 
     async openLoginPage() {
-        await Browser.navigateTo("https://www.saucedemo.com/")
-
+               await Browser.navigateTo("https://www.saucedemo.com/")
     }
 
     async getLoginLogoText() {
-        return this.loginPageLogo.getText();
+               return this.loginPageLogo.getText();
     }
 
     async isUsernameFieldDisplayed() {
-        return this.usernameField.isDisplayed();
+              return this.usernameField.isDisplayed();
     }
 
     async isPasswordFieldDisplayed() {
-        return this.passwordField.isDisplayed();
+               return this.passwordField.isDisplayed();
     }
 
     async isLoginButtonDisplayed() {
-        return this.loginButton.isDisplayed();
+               return this.loginButton.isDisplayed();
     }
 
     async isLoginButtonEnabled() {
-        return this.loginButton.isEnabled();
+               return this.loginButton.isEnabled();
     }
 
     async isInfoBlockDisplayed() {
-        return this.infoBlock.isDisplayed();
+             return this.infoBlock.isDisplayed();
     }
 
     async getUsernamePlaceholder() {
-        return this.usernameField.getAttribute("placeholder");
+               return this.usernameField.getAttribute("placeholder");
     }
 
     async getPasswordPlaceholder() {
-        return this.passwordField.getAttribute("placeholder");
+               return this.passwordField.getAttribute("placeholder");
     }
 
     async getLoginButtonText() {
-        return this.loginButton.getValue();
+              return this.loginButton.getValue();
     }
 
     async getLoginButtonColor() {
-        return this.loginButton.getCssProperty('background-color');
+               return this.loginButton.getCssProperty('background-color');
     }
 
-    async getSortedAllowedUsernamesToString() {
-        const allowedUsernames = ['standard_user', 'locked_out_user', 'problem_user',
-            'performance_glitch_user', 'error_user', 'visual_user'];
-        const sortedAllowedUsernames = allowedUsernames.sort();
-        return sortedAllowedUsernames.toString();
+    async getUsernamesBlockText (){
+        return this.usernamesInfo.getText();
     }
 
-    async getSortedUsernamesToString() {
-        const usernamesText = await this.usernamesInfo.getText();
-        const usernames = usernamesText.split("\n");
-        usernames.shift();
-        const sortedUsernames = usernames.sort();
-        return sortedUsernames.toString();
-    }
-
+   
     async getPasswordInfoText() {
-        return this.passwordInfo.getText();
+               return this.passwordInfo.getText();
     }
 
-    async getPassword() {
-        const passwordElementText = await this.getPasswordInfoText();
-        const passwordText = passwordElementText.split(":\n");
-        return passwordText[1];
-    }
+    
+// async getPasswordToString() {
+//     const passwordText = passwordText.split(":\n");
+//     return passwordText[1];
 
+// }
+       
     async typeUsername(username) {
-        await this.usernameField.typeText(username);
+              await this.usernameField.typeText(username);
     }
 
     async typePassword(password) {
-        await this.passwordField.typeText(password);
+              await this.passwordField.typeText(password);
     }
 
     async clickLoginButton() {
-        await this.loginButton.click();
+              await this.loginButton.click();
     }
 
     async isLoginErrorMessageDisplayed() {
-        return this.loginErrorMessage.isDisplayed();
+              return this.loginErrorMessage.isDisplayed();
     }
 
     async isUsernameErrorIconDisplayed() {
-        return this.usernameErrorIcon.isDisplayed()
+              return this.usernameErrorIcon.isDisplayed()
     }
 
     async isPasswordErrorIconDisplayed() {
-        return this.passwordErrorIcon.isDisplayed()
+               return this.passwordErrorIcon.isDisplayed()
     }
 
     async clickCloseErrorMessageButton() {
-        await this.closeErrorMessageButton.click()
+              await this.closeErrorMessageButton.click()
     }
 
 

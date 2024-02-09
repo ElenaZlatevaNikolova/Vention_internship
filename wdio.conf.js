@@ -1,6 +1,7 @@
-const path = require('path')
+import * as path from 'path';
+import Logger from './framework/logConfiguration/Logger.js';
 
-exports.config = {
+export const config = {
     //
     // ====================
     // Runner Configuration
@@ -24,6 +25,7 @@ exports.config = {
     //
     specs: [
         './test/specs/**/*.js'
+        // './test/specs/**/loginFormTestsTwo.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -68,10 +70,10 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'error',
     //
-    // Set specific log levels per logger
-    // loggers:
+    // Set specific log levels per Logger
+    // Loggers:
     // - webdriver, webdriverio
     // - @wdio/browserstack-service, @wdio/devtools-service, @wdio/sauce-service
     // - @wdio/mocha-framework, @wdio/jasmine-framework
@@ -131,7 +133,9 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: [['allure', {
+        outputDir: 'allure-results',
+    }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -210,8 +214,10 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: function (test, context) {
+        const testName = test.title;
+        Logger.info(`Test ${testName} started`)
+    },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
@@ -234,8 +240,12 @@ exports.config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: function(test, context, { error, result, duration, passed, retries }) {
+        const testName = test.title;
+                        Logger.info(`Test ${testName} is completed`)
+                        Logger.info("---------------------------------------------------------------")
+                browser.takeScreenshot();
+            },
 
 
     /**
@@ -300,3 +310,4 @@ exports.config = {
     // afterAssertion: function(params) {
     // }
 }
+
