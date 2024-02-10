@@ -2,6 +2,7 @@ import LoginPage from "../../poms/LoginPage.js";
 import ProductPage from "../../poms/ProductPage.js";
 import { assert } from "chai";
 import Logger from "../../framework/logConfiguration/Logger.js";
+import { timeouts } from "../../framework/customTimeouts.js";
 
 describe('Validation of successful login in https://www.saucedemo.com/', () => {
 

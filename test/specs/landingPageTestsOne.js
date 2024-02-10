@@ -2,7 +2,6 @@ import Logger from "../../framework/logConfiguration/Logger.js";
 import LoginPage from "../../poms/LoginPage.js";
 import { assert } from "chai";
 
-
 describe('Validation of elements on the landing page of https://www.saucedemo.com/', () => {
 
     it('should navigate to the site and check if the logo, login button, username and password fields are present', async () => {
@@ -31,7 +30,7 @@ describe('Validation of elements on the landing page of https://www.saucedemo.co
         const isLoginButtonEnabled = await loginPage.isLoginButtonEnabled();
         assert.isTrue(isLoginButtonEnabled, "The login button is disabled!");
 
-Logger.logStep('Check if the section with default usernames and passwords is displayed')
+        Logger.logStep('Check if the section with default usernames and passwords is displayed')
         const isInfoBlockDisplayed = await loginPage.isInfoBlockDisplayed();
         assert.isTrue(isInfoBlockDisplayed, "The login information block is not displayed!");
 

@@ -4,19 +4,19 @@ import Logger from "../logConfiguration/Logger.js";
 
 
 class TextBox extends BaseElement {
-  
+
   constructor(name, selector) {
     super(name, selector);
   }
 
   async clear() {
     Logger.debug(`Clear value of ${this.name}`)
-        const element = await super.getElement();
+    const element = await super.getElement();
     await element.clearValue();
   }
 
   async typeText(text) {
-  Logger.debug(`Type ${text} in ${this.name}`)
+    Logger.debug(`Type ${text} in ${this.name}`)
     const element = await super.getElement();
     await element.setValue(text);
   }
@@ -31,6 +31,7 @@ class TextBox extends BaseElement {
     Logger.debug(`Get placeholder of ${this.name}`)
     const element = await super.getElement();
     const placeholder = element.getAttribute('placeholder');
+    Logger.debug(`The placeholder text of ${this.name} is ${placeholder}.`)
     return placeholder;
   }
 }

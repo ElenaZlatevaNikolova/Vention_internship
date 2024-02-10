@@ -25,7 +25,7 @@ export const config = {
     //
     specs: [
         './test/specs/**/*.js'
-        // './test/specs/**/loginFormTestsTwo.js'
+       
     ],
     // Patterns to exclude.
     exclude: [
@@ -216,7 +216,7 @@ export const config = {
      */
     beforeTest: function (test, context) {
         const testName = test.title;
-        Logger.info(`Test ${testName} started`)
+        Logger.info(`Test ${testName} - started`)
     },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
@@ -242,9 +242,11 @@ export const config = {
      */
     afterTest: function(test, context, { error, result, duration, passed, retries }) {
         const testName = test.title;
-                        Logger.info(`Test ${testName} is completed`)
+                        Logger.info(`Test ${testName} - completed`)
                         Logger.info("---------------------------------------------------------------")
-                browser.takeScreenshot();
+                        if (error) {
+                            browser.takeScreenshot();
+                        }
             },
 
 

@@ -4,34 +4,33 @@ let innerLogger = log4js.getLogger();
 import AllureReporter from '@wdio/allure-reporter';
 
 log4js.configure(logConfig);
-
 class Logger {
 
-     trace(message) {
+    trace(message) {
         innerLogger.trace(message);
     }
 
-     debug(message) {
+    debug(message) {
         innerLogger.debug(message);
     }
 
-     info(message) {
+    info(message) {
         innerLogger.info(message);
     }
 
-     warn(message) {
+    warn(message) {
         innerLogger.warn(message);
     }
 
-     error(message) {
+    error(message) {
         innerLogger.error(message);
     }
 
-     fatal(message) {
+    fatal(message) {
         innerLogger.fatal(message);
     }
 
-     logStep(message) {
+    logStep(message) {
         innerLogger.info(`${message}`)
         AllureReporter.addStep(`${message}`)
     }

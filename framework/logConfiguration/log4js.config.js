@@ -1,17 +1,17 @@
 const logConfig = {
   appenders: {
-    out: { 
+    out: {
       type: "console",
       layout: {
         type: "pattern",
         pattern: "%[[%d{yyyy-MM-dd hh:mm:ss}] [%p] %m%"
       }
     },
-    app: { 
-      type: "file", 
-      filename:  "logs/app.log",
-      layout: { 
-        type: "pattern", 
+    app: {
+      type: "file",
+      filename: "logs/app.log",
+      layout: {
+        type: "pattern",
         pattern: "[%d{yyyy-MM-dd hh:mm:ss}] [%p] %m%"
       }
     }

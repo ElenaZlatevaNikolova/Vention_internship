@@ -8,7 +8,7 @@ describe('Validation of elements in the login form on https://www.saucedemo.com/
     it.only('should check the elements of a login form and that the default credentials are displayed', async () => {
         const loginPage = new LoginPage();
         const errorMessage = "Text doesn't match!";
-        
+
         Logger.logStep('Open login page')
         await loginPage.openLoginPage();
 
@@ -36,20 +36,20 @@ describe('Validation of elements in the login form on https://www.saucedemo.com/
 
         Logger.logStep('Check the usernames from the usernames section')
         const allowedUsernames = ['standard_user', 'locked_out_user', 'problem_user',
-        'performance_glitch_user', 'error_user', 'visual_user'];
+            'performance_glitch_user', 'error_user', 'visual_user'];
         const sortedAllowedUsernames = allowedUsernames.sort();
         const allowedUsernamesToString = sortedAllowedUsernames.toString();
-        
+
         const usernamesBlockText = await loginPage.getUsernamesBlockText();
         const usernames = usernamesBlockText.split('\n');
         usernames.shift();
         const sortedUsernames = usernames.sort();
-       const sortedUsernamesToString = sortedUsernames.toString();
-                     assert.equal(sortedUsernamesToString, allowedUsernamesToString, errorMessage);
+        const sortedUsernamesToString = sortedUsernames.toString();
+        assert.equal(sortedUsernamesToString, allowedUsernamesToString, errorMessage);
 
         Logger.logStep('Check the password from the password section')
         const expectedText = "secret_sauce";
-       const passwordBlockText = await loginPage.getPasswordInfoText();
+        const passwordBlockText = await loginPage.getPasswordInfoText();
         const passwordText = passwordBlockText.split(":\n");
         passwordText.shift();
         const passwordTextToString = passwordText.toString();
