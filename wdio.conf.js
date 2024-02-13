@@ -25,7 +25,7 @@ export const config = {
     //
     specs: [
         './test/specs/**/*.js'
-       
+        // './test/specs/errorHandlingTestsThree.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -135,6 +135,7 @@ export const config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [['allure', {
         outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
     }]],
 
     // Options to be passed to Mocha.

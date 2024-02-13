@@ -2,7 +2,7 @@ import LoginPage from "../../poms/LoginPage.js";
 import ProductPage from "../../poms/ProductPage.js";
 import { assert } from "chai";
 import Logger from "../../framework/logConfiguration/Logger.js";
-import { timeouts } from "../../framework/customTimeouts.js";
+import timeouts from "../../framework/customTimeouts.js";
 
 describe('Validation of successful login in https://www.saucedemo.com/', () => {
 
@@ -23,8 +23,9 @@ describe('Validation of successful login in https://www.saucedemo.com/', () => {
         await loginPage.clickLoginButton()
 
         Logger.logStep('Checking if the product page logo is displayed')
-        const isProductPageElementDisplayed = await productPage.isProductPageElementDisplayed();
+        const isProductPageElementDisplayed = await productPage.isProductPageElementDisplayed(timeouts.MIN);
         assert.isTrue(isProductPageElementDisplayed, "User is not logged in!")
+
 
     });
 })

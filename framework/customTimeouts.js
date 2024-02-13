@@ -1,6 +1,8 @@
-export const timeouts = {
-    DEFAULT_TIMEOUT: 10000,
-    MIN_TIMEOUT: 1000,
-    SHORT_TIMEOUT: 5000,
-    LONG_TIMEOUT: 20000
-}
+const timeouts = {
+    DEFAULT: 10000,
+    MIN: 1000,
+    SHORT: 5000,
+    LONG: 20000
+};
+
+export default timeouts;

@@ -4,7 +4,6 @@ import TextBox from "../framework/elements/TextBox.js";
 import Browser from "../framework/Browser.js";
 import Button from "../framework/elements/Button.js";
 
-
 class LoginPage extends BaseForm {
     constructor() {
         super("Login page", "//div[@class='login_logo']")
@@ -29,24 +28,24 @@ class LoginPage extends BaseForm {
         return this.loginPageLogo.getText();
     }
 
-    async isUsernameFieldDisplayed() {
-        return this.usernameField.isDisplayed();
+    async isUsernameFieldDisplayed(timeout) {
+        return this.usernameField.isDisplayed(timeout);
     }
 
-    async isPasswordFieldDisplayed() {
-        return this.passwordField.isDisplayed();
+    async isPasswordFieldDisplayed(timeout) {
+        return this.passwordField.isDisplayed(timeout);
     }
 
-    async isLoginButtonDisplayed() {
-        return this.loginButton.isDisplayed();
+    async isLoginButtonDisplayed(timeout) {
+        return this.loginButton.isDisplayed(timeout);
     }
 
-    async isLoginButtonEnabled() {
-        return this.loginButton.isEnabled();
+    async isLoginButtonEnabled(timeout) {
+        return this.loginButton.isEnabled(timeout);
     }
 
-    async isInfoBlockDisplayed() {
-        return this.infoBlock.isDisplayed();
+    async isInfoBlockDisplayed(timeout) {
+        return this.infoBlock.isDisplayed(timeout);
     }
 
     async getUsernamePlaceholder() {
@@ -69,7 +68,6 @@ class LoginPage extends BaseForm {
         return this.usernamesInfo.getText();
     }
 
-
     async getPasswordInfoText() {
         return this.passwordInfo.getText();
     }
@@ -86,25 +84,22 @@ class LoginPage extends BaseForm {
         await this.loginButton.click();
     }
 
-    async isLoginErrorMessageDisplayed() {
-        return this.loginErrorMessage.isDisplayed();
+    async isLoginErrorMessageDisplayed(timeout) {
+        return this.loginErrorMessage.isDisplayed(timeout);
     }
 
-    async isUsernameErrorIconDisplayed() {
-        return this.usernameErrorIcon.isDisplayed()
+    async isUsernameErrorIconDisplayed(timeout) {
+        return this.usernameErrorIcon.isDisplayed(timeout)
     }
 
-    async isPasswordErrorIconDisplayed() {
-        return this.passwordErrorIcon.isDisplayed()
+    async isPasswordErrorIconDisplayed(timeout) {
+        return this.passwordErrorIcon.isDisplayed(timeout)
     }
 
     async clickCloseErrorMessageButton() {
         await this.closeErrorMessageButton.click()
     }
 
-
 }
-
-
 
 export default LoginPage;

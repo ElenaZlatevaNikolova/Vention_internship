@@ -17,9 +17,10 @@ const logConfig = {
     }
   },
   categories: {
-    default: { "appenders": ["out", "app"], "level": "debug" },
-    trace: { "appenders": ["app"], "level": "trace" }
+    default: { appenders: ["out", "app"], level: "debug" },
+    app: { appenders: ["app"], level: "trace" } 
   }
+  
 }
 
 export default logConfig;

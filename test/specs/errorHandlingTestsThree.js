@@ -1,10 +1,9 @@
 import LoginPage from "../../poms/LoginPage.js";
 import { assert } from "chai";
 import Logger from "../../framework/logConfiguration/Logger.js";
-import { timeouts } from "../../framework/customTimeouts.js";
+import timeouts from "../../framework/customTimeouts.js";
 
-
-describe('Validation of elements on the landing page of https://www.saucedemo.com/', () => {
+describe('Check if the error handling is well implemented on the landing page of https://www.saucedemo.com/', () => {
 
     it('should navigate to the site and check if the login page is accessible and the error handling is well implemented', async () => {
         const loginPage = new LoginPage();
@@ -31,15 +30,15 @@ describe('Validation of elements on the landing page of https://www.saucedemo.co
         await loginPage.clickCloseErrorMessageButton()
 
         Logger.logStep('Check if login error message is still displayed')
-        isLoginErrorMessageDisplayed = await loginPage.isLoginErrorMessageDisplayed(timeouts.MIN_TIMEOUT);
+        isLoginErrorMessageDisplayed = await loginPage.isLoginErrorMessageDisplayed(timeouts.MIN);
         assert.isFalse(isLoginErrorMessageDisplayed, "Text is still displayed!")
 
         Logger.logStep('Check if username error is not displayed anymore')
-        isUsernameErrorIconDisplayed = await loginPage.isUsernameErrorIconDisplayed(timeouts.MIN_TIMEOUT)
+        isUsernameErrorIconDisplayed = await loginPage.isUsernameErrorIconDisplayed(timeouts.MIN)
         assert.isFalse(isUsernameErrorIconDisplayed, "Element is still displayed!")
 
         Logger.logStep('Check if password error icon is not displayed anymore')
-        isPasswordErrorIconDisplayed = await loginPage.isPasswordErrorIconDisplayed(timeouts.MIN_TIMEOUT);
+        isPasswordErrorIconDisplayed = await loginPage.isPasswordErrorIconDisplayed(timeouts.MIN);
         assert.isFalse(isPasswordErrorIconDisplayed, "Element is still displayed!")
 
     });

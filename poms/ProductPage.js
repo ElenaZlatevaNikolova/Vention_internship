@@ -2,7 +2,6 @@ import BaseForm from "../framework/BaseForm.js";
 import Label from "../framework/elements/Label.js";
 import Browser from "../framework/Browser.js";
 import Logger from "../framework/logConfiguration/Logger.js";
-import { timeouts } from "../framework/customTimeouts.js";
 
 class ProductPage extends BaseForm {
     constructor() {

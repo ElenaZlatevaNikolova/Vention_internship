@@ -1,13 +1,14 @@
 import log4js from 'log4js';
 import logConfig from './log4js.config.js';
 let innerLogger = log4js.getLogger();
+let fileLogger = log4js.getLogger();
 import AllureReporter from '@wdio/allure-reporter';
 
 log4js.configure(logConfig);
 class Logger {
 
     trace(message) {
-        innerLogger.trace(message);
+        fileLogger.trace(message);
     }
 
     debug(message) {
