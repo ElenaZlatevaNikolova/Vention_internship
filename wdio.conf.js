@@ -243,12 +243,15 @@ export const config = {
      */
     afterTest: function(test, context, { error, result, duration, passed, retries }) {
         const testName = test.title;
-                        Logger.info(`Test ${testName} - completed`)
-                        Logger.info("---------------------------------------------------------------")
-                        if (error) {
-                            browser.takeScreenshot();
-                        }
-            },
+        Logger.info(`Test ${testName} - ${passed ? 'passed' : 'failed'}`);
+    Logger.info("---------------------------------------------------------------");
+
+    if (!passed) {
+        Logger.error(`Test ${testName} failed. Taking screenshot.`);
+        browser.takeScreenshot();
+        }
+    },
+            
 
 
     /**
